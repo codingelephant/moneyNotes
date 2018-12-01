@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title><%= title %> </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/style.css" />
+  </head>
+
+  <body>
+
+    <div class="bg-primary border-bottom shadow-sm">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3  container">
+                <h1 class="my-0 mr-md-auto text-light font-weight-normal">moneyNotes</h1>
+                <nav class="my-2 my-md-0 mr-md-3">
+                  <a class="p-2 text-light" href="/notes">Notes</a>
+                  <a class="p-2 text-light" href="/auth/login">Sign In</a>
+                  <a class="p-2 text-light" href="/auth/register">Create a free account</a>
+                  <a class="p-2 text-light" href="/support">Support</a>
+                </nav>
+        </div>
+      <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
+    </div>
+
+<% if(flash_info) { %>
+      <% for(var i=0; i<flash_info.length;i++) { %>
+          <p class="alert alert-danger"><%= flash_info[i].msg %></p>
+      <% } %>
+<% } %>
+
+
+<% if(flash_success) { %>
+  <% for(var i=0; i<flash_success.length;i++) { %>
+      <p class="alert alert-success"><%= flash_success[i] %></p>
+  <% } %>
+<% } %>

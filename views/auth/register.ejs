@@ -1,0 +1,29 @@
+<%- include('../common/header') -%>
+<div class="container">
+  <h2>Create an Account</h2>
+
+  <form action="" method="POST">
+        <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" name="name" required />
+        </div>
+
+        <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" class="form-control" name="email" required />
+        </div>
+
+        <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="form-control" name="password" required />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Register</button>
+            <p>Already have an account ? <a href="/auth/login" >Login</a></p>
+        </div>
+
+  </form>
+
+</div>
+<%- include('../common/footer') -%>

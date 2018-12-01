@@ -1,0 +1,135 @@
+<%- include('../common/header') -%>
+<div class="container">
+  <h2>My Money Notes</h2>
+  
+  <div class="row">
+    <div class="col-md-10">
+
+      
+        <div class="btn-group" role="group" aria-label="Tabs">
+            <a href="/notes?type=0" class="btn btn-primary <%= type==0 ? 'active' : '' %> ">All</a>
+            <a href="/notes?type=1" class="btn btn-primary <%= type==1 ? 'active' : '' %>">Expense</a>
+            <a href="/notes?type=2" class="btn btn-primary <%= type==2 ? 'active' : '' %>">Income</a>
+            <a href="/notes?type=3" class="btn btn-primary <%= type==3 ? 'active' : '' %>">Receivable</a>
+          </div>
+    </div>
+    <div class="col-md-2">
+      <a href="/notes/create" class="btn btn-primary">Add New</a>
+    </div><!-- end of .col-md-2 -->
+  </div><!-- end of .row -->
+
+  
+    <form action="">
+      <div class="row py-3">
+      <div class="col-md-4">
+        <input type="text" value="<%= q %>" name="q" placeholder="Enter keyword" class="form-control" />
+      </div>
+
+      <div class="col-md-2">
+          <input type="date" value="<%= from_date %>" name="from_date" placeholder="From date" class="form-control" />
+      </div>
+      <div class="col-md-2">
+          <input type="date" value="<%= to_date %>" name="to_date" class="form-control" />
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary">Search</button>
+        <a class="btn btn-default" href="/notes">Clear</a>
+      </div>
+
+    </div>
+    </form>
+  
+
+  <div class="row my-3">
+      <div class="col-md-12">
+        <table class="table table-striped">
+          <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Attachment</th>
+            <th>Action</th>
+          </tr>
+        <%  if(transactions.length > 0) { %>
+        <%  transactions.map((trans,i)=>{  %>
+        <% 
+        var type = types[trans.type]; 
+        var clsName = "danger";
+        if(trans.type== 2){
+            clsName = "success";
+        }
+        if(trans.type== 3){
+           clsName = "primary";
+        }
+        %>
+          <tr class="<%= clsName %>">
+            <td><%= trans.title %> </td>
+            <td> <%= trans.amount %> <%= currencies[trans.currency] %> </td>
+            <td> <span class="px-2 py-1 label text-light bg-<%= clsName %>"><%= type %></span></td>
+            <td> <%= trans.date %> </td>
+            <td> 
+              <% if(trans.attachment) { %> 
+                <img src="/uploads/notes/<%= trans.attachment %>" style="width:140px;" />
+              <% }else{ %>
+                -
+              <% } %>
+            </td>
+            <td> 
+              <a href="/transaction/<%= trans.id %>/edit" class="btn btn-sm btn-primary">Edit</a>
+              <a onclick="return confirm('Are you sure to delete this ?');" href="/transaction/<%= trans.id %>/remove" class="btn btn-sm btn-danger">Remove</a>
+             <% if(trans.type == 3){ %>
+              <a href="/transaction/<%= trans.id %>/income" class="btn btn-sm btn-success">Mark as Income</a>
+             <% } %>
+            </td>
+          </tr>
+      <%  }) %>  
+      <%  }else { %>
+        <tr>
+          <td colspan="5">
+            <p class="alert alert-info">No record found!</p>
+          </td>
+        </tr>
+      <% } %>
+
+        </table>
+        <p class="alert alert-default">
+          <span class="p-2 bg-danger text-white">Total Expense : <%= totalExpense %></span>
+          <span class="p-2 bg-success text-white">Total Income : <%= totalIncome %></span>
+          <span class="p-2 bg-warning text-white">Total Receivable : <%= totalReceivable %></span>
+          <span class="p-2 bg-primary text-white">Current Balance : <%= currentBalance %></span>
+          <span class="p-2 bg-secondary text-white">Expected Balance : <%= expectedBalance %></span>
+        </p>
+      </div>
+  </div>
+
+
+  <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <% if(pagination.hasPrevPage){ %>
+            <li class="page-item">
+                <a class="page-link" href="/notes?page=<%= pagination.hasPrevPage %>" tabindex="-1">Previous</a>
+            </li>
+          <% } %>
+
+           <% for(var i = 1; i<= pagination.totalPages; i++){ %>
+          <li class="page-item  <%= (i==pagination.currentPage) ? 'active' : '' %>  ">
+            <a class="page-link" href="/notes?page=<%= i %>"><%= i %></a>
+          </li>
+           <% } %>
+
+
+           <% if(pagination.hasNextPage){ %>
+           <li class="page-item">
+              <a class="page-link" href="/notes?page=<%= pagination.hasNextPage %>">Next</a>
+            </li>
+           <% } %>
+
+        </ul>
+      </nav>
+    </div>
+
+</div>
+<%- include('../common/footer') -%>

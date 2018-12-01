@@ -1,0 +1,17 @@
+
+
+a {
+  color: #00B7FF;
+}
+
+tr.expense {
+  border-bottom: 1px solid red;
+}
+
+tr.income {
+  border-bottom: 1px solid green;
+}
+
+tr.receivable {
+  border-bottom: 1px solid purple;
+}

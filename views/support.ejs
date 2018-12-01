@@ -1,0 +1,33 @@
+<%- include('common/header') -%>
+<div class="container">
+  <h2>Contact Us</h2>
+
+  <form action="" method="POST">
+        <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" name="name" required />
+        </div>
+
+        <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" class="form-control" name="email" required />
+        </div>
+
+        <div class="form-group">
+                <label for="">Subject</label>
+                <input type="text" class="form-control" name="subject" required />
+        </div>
+
+        <div class="form-group">
+                <label for="">Message</label>
+                <textarea class="form-control" name="message" id="message" cols="30" rows="10" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Send</button>
+        </div>
+
+  </form>
+
+</div>
+<%- include('common/footer') -%>

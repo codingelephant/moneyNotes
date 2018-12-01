@@ -1,0 +1,60 @@
+<%- include('../common/header') -%>
+
+<div class="container">
+  <h2>Create New Note</h2>
+
+  <form action="/notes/store" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Type</label>
+        <select name="type" id="type" class="form-control">
+            <% for(var i = 1; i < types.length; i++){  %>
+            <option value="<%= i %>"><%= types[i] %></option>
+            <% } %>
+        </select>
+    </div><!-- end of form-group -->
+
+      <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" name="title" list="titles" />
+           <datalist id="titles">
+                <option value="Lunch">
+                <option value="Dinner">
+                <option value="Salary">
+            </datalist>
+      </div><!-- end of form-group -->
+      <div class="form-group">
+            <label>Amount</label>
+            <input type="number" class="form-control" name="amount" />
+     </div><!-- end of form-group -->
+     <div class="form-group">
+            <label>Currency</label>
+            <select name="currency" class="form-control">
+                <option value="1">MMK</option>
+                <option value="2">USD</option>
+                <option value="3">SGD</option>
+            </select>
+        </div><!-- end of form-group -->
+        <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" id="date" class="form-control" />
+        </div><!-- end of form-group -->
+
+        <div class="form-group">
+                <label>Attachment(Optional)</label>
+                <input type="file" name="attachment" class="form-control" />
+        </div><!-- end of form-group -->
+
+        <div class="form-group">
+            <button class="btn btn-success">Submit</button>
+        </div>
+        
+
+  </form>
+
+  <a class="btn btn-default" href="/notes">Back to List</a>
+
+</div>
+<script>
+document.getElementById('date').valueAsDate = new Date();
+</script>
+<%- include('../common/footer') -%>
