@@ -18,9 +18,15 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3  container">
                 <h1 class="my-0 mr-md-auto text-light font-weight-normal">moneyNotes</h1>
                 <nav class="my-2 my-md-0 mr-md-3">
-                  <a class="p-2 text-light" href="/notes">Notes</a>
+                  
+                  <% if(user) { %>
+                    <a href="#" class="p-x text-light">Howdy, <%= user.name %>!</a>
+                    <a class="p-2 text-light" href="/notes">My Notes</a>
+                    <a class="p-2 text-light" href="/auth/logout">Logout</a>
+                  <% } else{  %>
                   <a class="p-2 text-light" href="/auth/login">Sign In</a>
                   <a class="p-2 text-light" href="/auth/register">Create a free account</a>
+                  <% } %>
                   <a class="p-2 text-light" href="/support">Support</a>
                 </nav>
         </div>
@@ -31,6 +37,12 @@
       <% for(var i=0; i<flash_info.length;i++) { %>
           <p class="alert alert-danger"><%= flash_info[i].msg %></p>
       <% } %>
+<% } %>
+
+<% if(flash_error) { %>
+  <% for(var i=0; i<flash_error.length;i++) { %>
+      <p class="alert alert-danger"><%= flash_error[i] %></p>
+  <% } %>
 <% } %>
 
 

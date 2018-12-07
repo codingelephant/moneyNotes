@@ -9,9 +9,11 @@ const PER_PAGE = 5;
 var multer  = require('multer');
 var thumbnailUpload = multer({ dest: 'public/uploads/notes' });
 var upload =  thumbnailUpload.single('attachment');
+var auth = require('connect-ensure-login').ensureLoggedIn;
+
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.get('/',   auth('/auth/login'), async function(req, res, next) {
  
   var totalExpense = await models.Transaction.sum('amount', {where:{type:1}}) || 0;
   var totalIncome  = await models.Transaction.sum('amount', {where:{type:2}}) || 0;
